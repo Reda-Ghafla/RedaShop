@@ -1,0 +1,82 @@
+:root {
+  padding: 0;
+  margin: 0;
+  --colorBlue: #16697a;
+  --colorSecondBlue: #489fb5;
+  --colorThirdBlue: #82c0cc;
+  --colorBlack: #1c0f13;
+  --colorYellow: #ffa62b;
+  --colorWhite: #eee;
+}
+
+a {
+  text-decoration: none;
+  color: inherit
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+  padding: 1rem;
+  background-color: var(--colorYellow);
+}
+
+header a {
+  text-decoration: none;
+  color: var(--colorWhite);
+  font-weight: bold;
+}
+
+main {
+  padding: 1rem;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 90vw;
+}
+
+.product {
+  border: 1px solid var(--colorYellow);
+  margin: 1rem;
+}
+
+.product img {
+  width: 100%;
+  max-width: 15rem;
+
+}
+
+.product .product_info {
+  /* display: flex;
+  flex-direction: column; */
+  padding: 1rem;
+}
+
+.product button {
+  width: 100%;
+  background-color: var(--colorYellow);
+  color: var(--colorWhite);
+  border: 1px solid transparent;
+  padding: .4rem;
+  border-radius: .3rem;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.product button:hover {
+  background-color: var(--colorBlack);
+  border: 1px solid var(--colorYellow)
+}
