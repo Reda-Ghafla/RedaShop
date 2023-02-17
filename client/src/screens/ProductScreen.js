@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FETCH_FAIL, FETCH_REQUEST, FETCH_SUCCESS } from "./Dispatch";
 import ReactLoading from "react-loading";
 import Rating from "../components/Rating";
+import { CART_ADD_ITEM } from "./ActionType";
+import { Store } from "./Store";
 
 const ProductScreen = () => {
   const { slug } = useParams();
@@ -24,8 +26,11 @@ const ProductScreen = () => {
     error: "",
     product: [],
   };
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { product, loading, error } = state;
+  const [{ product, loading, error }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: FETCH_REQUEST });
@@ -39,10 +44,25 @@ const ProductScreen = () => {
     fetchData();
   }, [slug]);
 
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart } = state;
+  const addtoCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === x.product);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Sorry, the product is out of stock");
+      return;
+    }
+    ctxDispatch({
+      type: CART_ADD_ITEM,
+      payload: { ...product, quantity},
+    });
+  };
   return (
     <div>
       <Link to={"/"}>
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <i className="fa fa-arrow-left" aria-hidden="true"></i>
         <strong>Back home </strong>
       </Link>
       {loading ? (
@@ -82,8 +102,20 @@ const ProductScreen = () => {
                   <span>status :</span>
                 </div>
                 <div className="col">
-                  <span> {product.countInStock > 0 ? <div className="succes"> Available </div> : <div className="danger">Out Stock</div> } </span>
+                  <span>
+                    {" "}
+                    {product.countInStock > 0 ? (
+                      <div className="succes"> Available </div>
+                    ) : (
+                      <div className="danger">Out Stock</div>
+                    )}{" "}
+                  </span>
                 </div>
+              </div>
+              <div className="row">
+                <button onClick={addtoCartHandler} className="btn btn-product">
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>

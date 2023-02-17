@@ -3,24 +3,38 @@ const data = require("./data");
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 app.get("/api/products", (req, res) => {
-  res.send(data.products);
+  res.status(200).send(data.products);
 });
 
 app.get("/api/products/product/:slug", (req, res) => {
-  console.log(req.params.slug);
+  // console.log(req.params.slug);
 
   const product = data.products.find(
     (product) => product.slug === req.params.slug
   );
-  if(product){
-    res.send(product)
-  }else{
-    res.status(404).send({message : "Product Not Found"})
+  if (product) {
+    res.status(200).send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
   }
-  console.log(product);
-  res.send(data.products);
+  // console.log(product);
+  res.send(product);
+});
+app.get("/api/products/:id", (req, res) => {
+  // console.log(req.params.slug);
+
+  const product = data.products.find(
+    (product) => product._id === req.params.id
+  );
+  if (product) {
+    res.status(200).send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+  // console.log(product);
+  res.send(product);
 });
 
 // console.log(data);

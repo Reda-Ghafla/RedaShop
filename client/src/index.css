@@ -8,10 +8,33 @@
   --colorYellow: #ffa62b;
   --colorWhite: #eee;
 }
-
+ul {
+  list-style: none;
+}
 a {
   text-decoration: none;
   color: inherit
+}
+button {
+  width: 100%;
+  background-color: var(--colorYellow);
+  color: var(--colorWhite);
+  border: 1px solid transparent;
+  padding: .4rem;
+  border-radius: .3rem;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.btn-product{
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.cart{
+  cursor: pointer;
+  
 }
 
 .underline{
@@ -33,6 +56,26 @@ body {
 header {
   padding: 1rem;
   background-color: var(--colorYellow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  font-size: 1.5rem;
+  padding: 0 1rem;
+}
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+
+.navbar ul li {
+  color: var(--colorBlack);
+  font-size: 1.5rem;
 }
 
 header a {
@@ -91,7 +134,9 @@ main {
   cursor: pointer;
 }
 
-.product button:hover {
+
+
+.product button:hover, .btn-product:hover  {
   background-color: var(--colorBlack);
   border: 1px solid var(--colorYellow)
 }
@@ -149,6 +194,8 @@ section .right{
   color: #eee;
 
  }
+
+ 
  .succes{
   background-color: rgba(24, 94, 24, 0.548);
 
